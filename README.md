@@ -10,4 +10,4 @@ Depending:
 
 Usage:
 
-Lust start start.bat or start.sh script
+Just start start.bat or start.sh script
