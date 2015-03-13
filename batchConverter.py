@@ -83,11 +83,12 @@ class batchConverterClass():
         if not os.path.exists(source):
             print 'File not found'
             return
-        cmd = ' '.join([self.bin, '"'+source+'"', '"'+target+'"'])
+        cmd = ' '.join(['"'+self.bin+'"', '"'+source+'"', '"'+target+'"'])
         self.proc = QProcess()
         processes.add(self.proc)
         QObject.connect( self.proc, SIGNAL('readyRead()'), lambda p=self.proc: self.printToConsole(p))
-        print 'Command: ', cmd
+        print 'Command: '
+        print cmd
         print
         self.proc.start(cmd)
         self.proc.finished.connect(lambda: self.next())
