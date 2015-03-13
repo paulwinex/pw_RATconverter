@@ -80,17 +80,35 @@ class batchConverterClass():
 
 
     def convertFile(self, source, target):
+        if not os.path.exists(source):
+            print 'File not found'
+            return
         cmd = ' '.join([self.bin, '"'+source+'"', '"'+target+'"'])
         self.proc = QProcess()
         processes.add(self.proc)
-#        self.proc.start('notepad')
+        QObject.connect( self.proc, SIGNAL('readyRead()'), lambda p=self.proc: self.printToConsole(p))
+        print 'Command: ', cmd
+        print
         self.proc.start(cmd)
         self.proc.finished.connect(lambda: self.next())
+
 
     def stop(self):
         self.process = False
         self.proc.kill()
         self.par.message('Stopped...')
+
+    def printToConsole(self, p):
+        output = p.readAll()
+        if not isinstance(output, str):
+            if sys.version_info[0] < 3:
+                output = str(output)
+            else:
+                output = str(output)
+        output = output.strip()
+        if output:
+            print output
+        pass
 
     def incSave(self, path):
         nameExt = os.path.basename(path)

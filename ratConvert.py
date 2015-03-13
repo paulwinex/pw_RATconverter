@@ -422,9 +422,11 @@ See tooltips of widgets!
         for i in range(self.sourceList_lw.count()):
             text = self.sourceList_lw.item(i).text
             if not os.path.isdir(text) and os.path.splitext(text)[1][1:].lower() in extList:
-                files.append(text)
+                if os.path.exists(text):
+                    files.append(text)
             else:
-                folders.append(text)
+                if os.path.exists(text):
+                    folders.append(text)
         for f in folders:
             files += self.readFolder(f, extList, self.sub_cb.isChecked())
 
