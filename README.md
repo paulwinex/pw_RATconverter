@@ -5,7 +5,7 @@ For windows and linux.
 
 Depending:
 - Python 2.7
-- PyЫшву
+- PySide
 - iconvert (Houdini utility)
 
 Usage:
