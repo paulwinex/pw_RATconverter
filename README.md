@@ -1,5 +1,5 @@
 # pw_RATconverter
-Simple GUI for iconvert program
+Simple GUI for iconvert programm
 
 For windows and linux.
 
