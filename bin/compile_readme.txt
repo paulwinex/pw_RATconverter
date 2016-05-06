@@ -1,4 +1,3 @@
-This is a compiled example of RAT Converter for Windows
 To compile new version you need:
 
 1. Install PyInstaller
