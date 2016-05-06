@@ -11,10 +11,11 @@ import sourceListItem
 import targetLineEdit
 import settings
 import formats
+from icons import icons_rcs
 
 import pltfrm as pl
 # Import the compiled UI module
-from ratConvert_UI import Ui_ratWindow
+from ratConvert_UIs import Ui_ratWindow
 # Create a class for our main window
 class ratConvertClass(QMainWindow, Ui_ratWindow):
     def __init__(self, parent=None):
@@ -28,12 +29,12 @@ class ratConvertClass(QMainWindow, Ui_ratWindow):
                          'Set IConvert path',
                          'same as source...',
                          'Out folder error!!!']
-        iconsPath = os.path.join(os.path.dirname(__file__),'icons')
-        self.icons = {'title':QIcon(os.path.join(iconsPath, 'rat_icon.png')),
-                      'image':QIcon(os.path.join(iconsPath, 'image.png')),
-                      'trash':QIcon(os.path.join(iconsPath, 'trash.png')),
-                      'minus':QIcon(os.path.join(iconsPath, 'minus.png')),
-                      'folder':QIcon(os.path.join(iconsPath, 'folder.png')),
+        # iconsPath = os.path.join(os.path.dirname(__file__),'icons')
+        self.icons = {'title':QIcon(':/rat_icon.png'),
+                      'image':QIcon(':/image.png'),
+                      'trash':QIcon(':/trash.png'),
+                      'minus':QIcon(':/minus.png'),
+                      'folder':QIcon(':/folder.png'),
                       }
         self.outFormats = formats.formats#['rat','exr']
         #Window
@@ -59,9 +60,9 @@ class ratConvertClass(QMainWindow, Ui_ratWindow):
 
 
         #settings
-        self.ini = 'ratConvertSettings'
+        self.confir_file_name = 'ratConvertSettings'
         self.defaultExt = 'exr,hdr,tif,png,jpg'
-        self.settings = settings.settingsClass(self.ini)
+        self.settings = settings.settingsClass(self.confir_file_name)
 
         self.fileList = []
         self.targetDir = None
@@ -131,7 +132,7 @@ class ratConvertClass(QMainWindow, Ui_ratWindow):
         """
         get iconvert binary file
         """
-        ic = self.settings.readSettings('iconvert','').toString()
+        ic = self.settings.readSettings('iconvert','')
         if not ic or not os.path.exists(ic):
             box = QMessageBox(self)
             box.setWindowTitle('iConvert')
@@ -157,7 +158,8 @@ class ratConvertClass(QMainWindow, Ui_ratWindow):
         """
         dialog for set iconvert path
         """
-        return str(QFileDialog.getOpenFileName(self,'Select iconvert binary',pl.defFolder,  pl.iconvert  ))
+        path = QFileDialog.getOpenFileName(self,'Select iconvert binary', pl.defFolder,  pl.iconvert  )
+        return path[0]
 
     def showHelp(self):
         """
@@ -192,7 +194,7 @@ See tooltips of widgets!
         """
         get extension list
         """
-        extList = str(self.settings.readSettings('ext','').toString())
+        extList = str(self.settings.readSettings('ext',''))
         if not extList:
             self.settings.writeValue('ext',self.defaultExt)
             return self.defaultExt
@@ -218,7 +220,7 @@ See tooltips of widgets!
         """
         save extensions
         """
-        extList = str(self.settings.readSettings('ext').toString())
+        extList = str(self.settings.readSettings('ext'))
         if not extList:
             extList = self.defaultExt
         if not ext.lower() in extList.split(','):# and not ext.lower() == 'rat':
@@ -243,7 +245,7 @@ See tooltips of widgets!
         """
         remove ext from settings
         """
-        extList = str(self.settings.readSettings('ext').toString()).split(',')
+        extList = str(self.settings.readSettings('ext')).split(',')
         for e in ext:
             if e in extList:
                 extList.pop(extList.index(e))
@@ -297,7 +299,7 @@ See tooltips of widgets!
         set source file button
         """
         extList = self.checkExtChecked()
-        dir = str(self.settings.readSettings('defIn',QVariant(os.path.expanduser('~'))).toString())
+        dir = str(self.settings.readSettings('defIn',os.path.expanduser('~')))
         #ADD FILES
         if tp:
             extFilter = ''
@@ -338,7 +340,7 @@ See tooltips of widgets!
 
 
     def getTargetDir(self):
-        dir = str(self.settings.readSettings('defOut',QVariant('')).toString()).replace('/','\\')
+        dir = str(self.settings.readSettings('defOut','')).replace('/','\\')
         if not dir: dir = self.getFolderFromFiles()
         folder = str(QFileDialog.getExistingDirectory(self,'Select Folder', dir))
         if folder:
@@ -495,7 +497,6 @@ def main():
     app = QApplication(sys.argv)
     window=ratConvertClass()
     window.show()
-    print window.windowTitle()
     sys.exit(app.exec_())
 if __name__ == "__main__":
     main()

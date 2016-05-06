@@ -13,10 +13,10 @@ class sourceListItemClass(QListWidgetItem):
         self.setFont(self.font)
         #TYPE
         if type:
-            self.setTextColor(self.color[0])
+            self.setForeground(QBrush(self.color[0]))
             self.setIcon(parent.icons['image'])
         else:
-            self.setTextColor(self.color[1])
+            self.setForeground(QBrush(self.color[1]))
             self.setIcon(parent.icons['folder'])
 
         self.updateText()

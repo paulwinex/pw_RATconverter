@@ -1,7 +1,7 @@
 #! /usr/bin/python
 import os, sys
+from PySide.QtCore import *
+from PySide.QtGui import *
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
 
 #from sip import wrapinstance

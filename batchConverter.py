@@ -57,7 +57,7 @@ class batchConverterClass():
         if self.i < self.end:
             self.batch(self.i)
         else:
-            self.par.setProcessBar(100)
+            self.par.setProcessBar(0)
             self.par.message('Completed!!!')
             self.par.complite()
 

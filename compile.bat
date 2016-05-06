@@ -1,0 +1,1 @@
+call C:\Python27\Scripts\pyinstaller.exe ratconverter.spec --onefile

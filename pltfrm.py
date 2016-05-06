@@ -12,7 +12,7 @@ if os.name == 'posix':
 
 elif os.name == 'nt':
     pl = 'Win'
-    defFolder = 'c:/'
+    defFolder = 'C:/'
     iconvert = 'iconvert.exe'
 elif os.name == 'os2':
     pl = 'Mac'
