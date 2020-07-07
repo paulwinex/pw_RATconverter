@@ -11,3 +11,6 @@ Depending:
 Usage:
 
 Just start start.bat or start.sh script
+
+Compiled EXE
+https://www.dropbox.com/s/teawmqp5r274n3p/RATConverter.zip?dl=0
