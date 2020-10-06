@@ -1,5 +1,8 @@
 #! /usr/bin/python
-from imports import *
+import os, sys
+from PySide2.QtCore import *
+from PySide2.QtGui import *
+from PySide2.QtWidgets import *
 
 processes = set([])
 
@@ -81,15 +84,15 @@ class batchConverterClass():
 
     def convertFile(self, source, target):
         if not os.path.exists(source):
-            print 'File not found'
+            print('File not found')
             return
         cmd = ' '.join(['"'+self.bin+'"', '"'+source+'"', '"'+target+'"'])
         self.proc = QProcess()
         processes.add(self.proc)
-        QObject.connect( self.proc, SIGNAL('readyRead()'), lambda p=self.proc: self.printToConsole(p))
-        print 'Command: '
-        print cmd
-        print
+        self.proc.readyRead.connect(lambda p=self.proc: self.printToConsole(p))
+        print('Command: ')
+        print(cmd)
+        print()
         self.proc.start(cmd)
         self.proc.finished.connect(lambda: self.next())
 
@@ -108,7 +111,7 @@ class batchConverterClass():
                 output = str(output)
         output = output.strip()
         if output:
-            print output
+            print(output)
         pass
 
     def incSave(self, path):

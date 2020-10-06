@@ -1,9 +1,0 @@
-<RCC>
-	<qresource>
-		<file>folder.png</file>
-		<file>image.png</file>
-		<file>minus.png</file>
-		<file>rat_icon.png</file>
-		<file>trash.png</file>
-	</qresource>
-</RCC>

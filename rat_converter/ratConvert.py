@@ -1,21 +1,23 @@
 #! /usr/bin/python
-# -*- coding: utf-8 -*-
 
-#default modules
-from imports import *
+import os, sys
+from PySide2.QtCore import *
+from PySide2.QtGui import *
+from PySide2.QtWidgets import *
 
 #Package modules
-import batchConverter
-import sourceListWidget
-import sourceListItem
-import targetLineEdit
-import settings
-import formats
-from icons import icons_rcs
-
-import pltfrm as pl
+from . import batchConverter
+from . import sourceListWidget
+from . import sourceListItem
+from . import targetLineEdit
+from . import settings
+from . import formats
+from . import pltfrm as pl
+from .icons import icons_rc
 # Import the compiled UI module
-from ratConvert_UIs import Ui_ratWindow
+from .ratConvert_UI import Ui_ratWindow
+
+
 # Create a class for our main window
 class ratConvertClass(QMainWindow, Ui_ratWindow):
     def __init__(self, parent=None):
@@ -174,7 +176,7 @@ See tooltips of widgets!
         '''
         box = QMessageBox(self)
         box.setWindowTitle('iConvert about')
-        box.setText('RAT Converter v1.0\nPaulWinex 2012')
+        box.setText('RAT Converter v1.2\nPaulWinex 2012')
         box.setDetailedText(text)
         box.exec_()
 
@@ -363,7 +365,7 @@ See tooltips of widgets!
 
     def checkExtChecked(self):
         allExt = []
-        for index in xrange(self.extList_lw.count()):
+        for index in range(self.extList_lw.count()):
             if self.extList_lw.item(index).checkState():
                 allExt.append(str(self.extList_lw.item(index).text().replace('.','')))
         return allExt
@@ -490,13 +492,3 @@ See tooltips of widgets!
     def complite(self):
         self.startEndProcess(False)
         
-import ctypes
-ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID('mycompany.myproduct.subproduct.version')
-
-def main():
-    app = QApplication(sys.argv)
-    window=ratConvertClass()
-    window.show()
-    sys.exit(app.exec_())
-if __name__ == "__main__":
-    main()

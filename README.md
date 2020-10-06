@@ -4,8 +4,8 @@ Simple GUI for iconvert programm
 For windows and linux.
 
 Depending:
-- Python 2.7
-- PySide
+- Python 3.7
+- PySide2
 - iconvert (Houdini utility)
 
 Usage:

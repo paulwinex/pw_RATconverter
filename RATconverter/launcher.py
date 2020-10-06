@@ -1,2 +1,0 @@
-import ratConvert
-ratConvert.main()

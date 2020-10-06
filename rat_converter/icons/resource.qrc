@@ -1,0 +1,10 @@
+<RCC>
+	<qresource>
+		<file>ratconverter.ico</file>
+		<file>trash.png</file>
+		<file>rat_icon.png</file>
+		<file>minus.png</file>
+		<file>image.png</file>
+		<file>folder.png</file>
+	</qresource>
+</RCC>
